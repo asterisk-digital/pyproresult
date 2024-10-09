@@ -3,8 +3,8 @@ import logging
 import requests
 
 class WebClient:
-    def __init__(self, username, password, dbname):
-        self.base_url = 'https://proresult.app/adm/'
+    def __init__(self, base_url, username, password, dbname):
+        self.base_url = base_url
         self.username = username
         self.password = password
         self.dbname = dbname
