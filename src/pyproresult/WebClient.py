@@ -1,4 +1,5 @@
 import logging
+from typing import BinaryIO
 
 import requests
 from bs4 import BeautifulSoup
@@ -91,3 +92,23 @@ class WebClient:
         logging.debug(files_metadata)
 
         return files_metadata
+
+    def upload_document(self, file_name: str, file_content: BinaryIO, folder_id: int):
+        """
+        Uploads a document to the ProResult system.
+        :param file_name: The name of the file to be uploaded.
+        :param file_content: The content of the file to be uploaded.
+        :param folder_id: The ID of the folder to upload the file to.
+        :return: None
+        """
+        logging.debug('Running upload_document_to_proresult...')
+
+        file = {'document': (file_name, file_content)}
+
+        response = self.session.post(f'{self.base_url}/Zdok_upload.php?folder={folder_id}',
+                                     files=file)
+
+        if response.status_code != 200:
+            raise Exception(f'Failed to upload {file_name} to proresult: {response.text}')
+
+        logging.info(f'Successfully uploaded {file_name} to proresult')
