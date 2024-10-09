@@ -22,9 +22,9 @@ class WebClient:
         """
 
         payload = {
-            'username': self.username,
+            'brnamn': self.username,
             'pass': self.password,
-            'dbname': self.dbname
+            'dbnamn': self.dbname
         }
 
         response = self.session.post(f'{self.base_url}/userlogin.php', data=payload)
