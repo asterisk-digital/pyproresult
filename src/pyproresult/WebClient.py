@@ -112,3 +112,18 @@ class WebClient:
             raise Exception(f'Failed to upload {file_name} to proresult: {response.text}')
 
         logging.info(f'Successfully uploaded {file_name} to proresult')
+
+    def delete_document(self, document_id: int):
+        """
+        Deletes a document from the ProResult system.
+        :param document_id: The ID of the document to be deleted.
+        :return: None
+        """
+        self.logger.debug('Running delete_document...')
+
+        response = self.session.get(f'{self.base_url}/Zdok.php?action=deleteDocument&dokid={document_id}')
+
+        if response.status_code != 200:
+            raise Exception(f'Error deleting document with id {document_id} from proresult: {response.text}')
+
+        logging.info(f'Successfully deleted document with id {document_id} from proresult')
