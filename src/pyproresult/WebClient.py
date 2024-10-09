@@ -2,6 +2,7 @@ import logging
 
 import requests
 
+
 class WebClient:
     def __init__(self, base_url, username, password, dbname):
         self.base_url = base_url
@@ -10,7 +11,8 @@ class WebClient:
         self.dbname = dbname
         self.session = requests.Session()
         self.verbose = False
-        pass
+
+        self.login()
 
     def login(self):
         """
