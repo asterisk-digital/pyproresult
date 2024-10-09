@@ -1,4 +1,4 @@
-from .APIClient import APIClient
+from .ApiClient import ApiClient
 from .WebClient import WebClient
 
-__all__ = ['APIClient', 'WebClient']
+__all__ = ['ApiClient', 'WebClient']
