@@ -11,9 +11,10 @@ with open("README.md", "r", "utf-8") as f:
     readme = f.read()
 
 github_link = "https://github.com/intrix-as/pyproresult"
+package_name = "pyproresult"
 
 setup(
-    name="pyproresult",
+    name=package_name,
     version="0.0.1",
     description="Library for interfacing with ProResult API",
     long_description=readme,
@@ -21,7 +22,7 @@ setup(
     author="David Skoland",
     author_email="davidskoland@gmail.com",
     url=github_link,
-    packages=["pyproresult"],
+    packages=[package_name],
     package_data={"": ["LICENSE"]},
     package_dir={"": "src"},
     include_package_data=True,
