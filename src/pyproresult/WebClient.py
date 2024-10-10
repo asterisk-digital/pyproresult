@@ -103,7 +103,7 @@ class WebClient:
         """
         logging.debug('Running upload_document_to_proresult...')
 
-        file = {'document': (file_name, file_content)}
+        file = {'document': (file_name, file_content.read())}
 
         response = self.session.post(f'{self.base_url}/Zdok_upload.php?folder={folder_id}',
                                      files=file)
