@@ -68,8 +68,7 @@ class WebClient:
             if filename_content is None:
                 continue
 
-            filename = str(filename_content).replace('.pdf', '')
-            file_metadata['FileName'] = filename
+            file_metadata['FileName'] = str(filename_content)
 
             # Extract document id
             document_id_element = item.find('div', attrs={'data-document-id': True})
