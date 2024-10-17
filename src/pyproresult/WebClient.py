@@ -5,6 +5,10 @@ import requests
 from bs4 import BeautifulSoup
 
 
+class ProresultException(Exception):
+    pass
+
+
 class WebClient:
     def __init__(self, base_url, username, password, dbname):
         self.base_url = base_url
@@ -20,7 +24,7 @@ class WebClient:
     def login(self):
         """
         Logs in to the Proresult website using the provided payload.
-        :raises Exception: If the login fails.
+        :raises ProresultException: If the login fails.
         :return: The status code of the login request.
         """
 
@@ -37,7 +41,7 @@ class WebClient:
             logging.debug(response.text) if self.verbose else None
         else:
             logging.error(response.text)
-            raise Exception(f'Proresult website login failed: {response.text}')
+            raise ProresultException(f'Proresult website login failed: {response.text}')
 
         return response.status_code
 
@@ -108,7 +112,7 @@ class WebClient:
                                      files=file)
 
         if response.status_code != 200:
-            raise Exception(f'Failed to upload {file_name} to proresult: {response.text}')
+            raise ProresultException(f'Failed to upload {file_name} to proresult: {response.text}')
 
         logging.info(f'Successfully uploaded {file_name} to proresult')
 
@@ -123,6 +127,6 @@ class WebClient:
         response = self.session.get(f'{self.base_url}/Zdok.php?action=deleteDocument&dokid={document_id}')
 
         if response.status_code != 200:
-            raise Exception(f'Error deleting document with id {document_id} from proresult: {response.text}')
+            raise ProresultException(f'Error deleting document with id {document_id} from proresult: {response.text}')
 
         logging.info(f'Successfully deleted document with id {document_id} from proresult')
