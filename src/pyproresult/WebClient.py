@@ -37,10 +37,10 @@ class WebClient:
         response = self.session.post(f'{self.base_url}/userlogin.php', data=payload)
 
         if response.status_code == 200:
-            logging.debug(f'Proresult website login successful')
-            logging.debug(response.text) if self.verbose else None
+            self.logger.debug(f'Proresult website login successful')
+            self.logger.debug(response.text) if self.verbose else None
         else:
-            logging.error(response.text)
+            self.logger.error(response.text)
             raise ProresultException(f'Proresult website login failed: {response.text}')
 
         return response.status_code
@@ -91,8 +91,8 @@ class WebClient:
             # add to list
             files_metadata.append(file_metadata)
 
-        logging.debug(f'scraped {len(files_metadata)} documents from Proresult')
-        logging.debug(files_metadata)
+        self.logger.debug(f'scraped {len(files_metadata)} documents from Proresult')
+        self.logger.debug(files_metadata)
 
         return files_metadata
 
@@ -104,8 +104,7 @@ class WebClient:
         :param folder_id: The ID of the folder to upload the file to.
         :return: None
         """
-        logging.debug('Running upload_document_to_proresult...')
-
+        self.logger.debug(f'Uploading {file_name} to proresult...')
         file = {'document': (file_name, file_content.read())}
 
         response = self.session.post(f'{self.base_url}/Zdok_upload.php?folder={folder_id}',
@@ -114,19 +113,15 @@ class WebClient:
         if response.status_code != 200:
             raise ProresultException(f'Failed to upload {file_name} to proresult: {response.text}')
 
-        logging.info(f'Successfully uploaded {file_name} to proresult')
-
     def delete_document(self, document_id: int):
         """
         Deletes a document from the ProResult system.
         :param document_id: The ID of the document to be deleted.
         :return: None
         """
-        self.logger.debug('Running delete_document...')
+        self.logger.debug(f'Deleting document with id {document_id}...')
 
         response = self.session.get(f'{self.base_url}/Zdok.php?action=deleteDocument&dokid={document_id}')
 
         if response.status_code != 200:
             raise ProresultException(f'Error deleting document with id {document_id} from proresult: {response.text}')
-
-        logging.info(f'Successfully deleted document with id {document_id} from proresult')
