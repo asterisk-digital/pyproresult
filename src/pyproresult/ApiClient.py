@@ -19,7 +19,7 @@ class ApiClient:
             'X-API-Secret': self.api_secret,
         }
 
-    def get_csv_data(self, function: str):
+    def get_csv_data(self, function: str) -> list[dict]:
         """
         Gets data from Proresult as CSV
         :param function: The function to call in tmcapi.php
@@ -61,6 +61,13 @@ class ApiClient:
         """
         workers = self.get_csv_data('tilsettCSV')
         return workers
+
+    def get_projects(self) -> list[dict]:
+        """
+        :return: List of projects
+        """
+        projects = self.get_csv_data('prosjektCSV')
+        return projects
 
     def get_images(self, deviation_id: int) -> {}:
         """
