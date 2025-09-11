@@ -46,14 +46,14 @@ class ApiClient:
 
         return csv_data
 
-    def get_deviations(self):
+    def get_deviations(self) -> list[dict]:
         """
         :return: List of deviations with ids, names etc.
         """
         csv_data = self.get_csv_data("hse_deviationCSV")
         return csv_data
 
-    def get_workers(self):
+    def get_workers(self) -> list[dict]:
         """
         :return: List of workers with names, ids etc.
         """
@@ -67,7 +67,14 @@ class ApiClient:
         projects = self.get_csv_data("prosjektCSV")
         return projects
 
-    def get_images(self, deviation_id: int) -> {}:
+    def get_customers(self) -> list[dict]:
+        """
+        :return: List of customers
+        """
+        customers = self.get_csv_data("kundeCSV")
+        return customers
+
+    def get_images(self, deviation_id: int) -> dict:
         """
         :param deviation_id: The id of the deviation to get images for
         :return: Dict with filename as key and url as value
