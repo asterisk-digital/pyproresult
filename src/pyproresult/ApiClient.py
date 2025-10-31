@@ -66,10 +66,15 @@ class ApiClient:
 
     def get_projects(self, include_inactive: bool = False) -> list[dict]:
         """
-        :return: List of projects
+        Gets project data from Proresult.
+        :param include_inactive: If True, include inactive/closed projects (taMedAvslutta=1)
+        :return: List of projects as dictionaries
         """
+        query_params = {}
+        if include_inactive:
+            query_params["taMedAvslutta"] = 1
 
-        projects = self.get_csv_data("prosjektCSV")
+        projects = self.get_csv_data("prosjektCSV", query_params)
         return projects
 
     def get_customers(self) -> list[dict]:
