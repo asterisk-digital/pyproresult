@@ -37,7 +37,7 @@ class ApiClient:
         if response.status_code >= 300:
             raise CsvDataError(f"Error getting CSV data, bad status code: {response.status_code} {response.text}")
 
-        # Doesn't pass encoding header correctly, but it's utf-8
+        # The response from the API doesn't pass encoding header correctly, but we know it's utf-8
         csv_data_raw = response.content.decode("utf-8")
 
         # Alternate error condition, they still send us 200 OK so we need to check the body
