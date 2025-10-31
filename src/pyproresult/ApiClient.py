@@ -19,14 +19,18 @@ class ApiClient:
             "X-API-Secret": self.api_secret,
         }
 
-    def get_csv_data(self, function: str) -> list[dict]:
+    def get_csv_data(self, function: str, query_params: dict | None = None) -> list[dict]:
         """
         Gets data from Proresult as CSV
         :param function: The function to call in tmcapi.php
+        :param query_params: Optional query parameters to pass to the API
         :raises CsvDataError: If the data is not available or the request fails
         :return:
         """
         url = self.api_url + "?fn=" + function
+        if query_params:
+            parts = [f"{key}={value}" if value is not None else f"{key}" for key, value in query_params.items()]
+            url += "&" + "&".join(parts)
 
         response = requests.get(url, headers=self.headers, timeout=60)
 
