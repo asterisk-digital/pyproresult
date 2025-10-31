@@ -64,10 +64,11 @@ class ApiClient:
         workers = self.get_csv_data("tilsettCSV")
         return workers
 
-    def get_projects(self) -> list[dict]:
+    def get_projects(self, include_inactive: bool = False) -> list[dict]:
         """
         :return: List of projects
         """
+
         projects = self.get_csv_data("prosjektCSV")
         return projects
 
