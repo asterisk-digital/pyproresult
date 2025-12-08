@@ -119,3 +119,6 @@ class ApiClient:
             images[filename] = url
 
         return images
+
+    def get_hms(self):
+        return self.get_csv_data("hmsCSV")
