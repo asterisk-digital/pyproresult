@@ -1,13 +1,13 @@
-[build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "pyproresult"
 version = "0.1.0"
 description = ""
 readme = "README.md"
 requires-python = ">=3.11"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
 
 dependencies = [
     "bs4>=0.0.2",
