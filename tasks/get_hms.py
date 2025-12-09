@@ -3,7 +3,7 @@ import os
 from pyproresult import ApiClient
 
 def main():
-    # Load .env from project root
+    # Load .env from cwd
     import dotenv
     dotenv.load_dotenv()
 
