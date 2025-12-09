@@ -1,7 +1,7 @@
 [project]
 name = "pyproresult"
-version = "0.1.0"
-description = ""
+version = "1.0.0"
+description = "Library for interfacing with Proresult"
 readme = "README.md"
 requires-python = ">=3.11"
 
