@@ -5,7 +5,7 @@ A simple Python library for interfacing with Proresult.
 ## Setup
 To set up for development, run:
 ```
-./scripts/dev_setup.sh
+uv sync
 ```
 
 
