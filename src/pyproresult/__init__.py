@@ -1,4 +1,4 @@
-from .ApiClient import ApiClient
-from .WebClient import WebClient
+from .api_client import ApiClient
+from .web_client import WebClient
 
 __all__ = ["ApiClient", "WebClient"]

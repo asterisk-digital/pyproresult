@@ -1,0 +1,28 @@
+[project]
+name = "pyproresult"
+version = "0.1.0"
+description = ""
+readme = "README.md"
+requires-python = ">=3.11"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+dependencies = [
+    "bs4>=0.0.2",
+    "lxml>=6.0.2",
+    "requests>=2.32.5",
+]
+
+[dependency-groups]
+dev = [
+    "setuptools",
+    "wheel",
+    "ruff",
+    "python-dotenv>=1.2.1",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
