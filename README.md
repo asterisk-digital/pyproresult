@@ -25,7 +25,7 @@ This class is used to interface with Proresult's API properly.
 ```(python)
 import pyproresult
 
-api_client = pyproresult.APIClient(api_key="YOUR_API_KEY")
+api_client = pyproresult.APIClient(account_id="YOUR_ACCOUNT_ID", api_key="YOUR_API_KEY")
 ```
 
 ## WebClient
@@ -37,5 +37,9 @@ This class is used to interface with Proresult's web interface, to enable things
 ```(python)
 import pyproresult
 
-web_client = pyproresult.WebClient(api_key="YOUR_API_KEY")
+web_client = pyproresult.WebClient(
+            base_url=envvars['PRORESULT_URL'],
+            username=envvars['PRORESULT_USERNAME'],
+            password=envvars['PRORESULT_PASSWORD'],
+            dbname=envvars['PRORESULT_DBNAME'])
 ```
