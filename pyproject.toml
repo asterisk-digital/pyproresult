@@ -4,16 +4,15 @@ version = "1.0.0"
 description = "Library for interfacing with Proresult"
 readme = "README.md"
 requires-python = ">=3.11"
-
-[build-system]
-requires = ["setuptools>=68", "wheel"]
-build-backend = "setuptools.build_meta"
-
 dependencies = [
     "bs4>=0.0.2",
     "lxml>=6.0.2",
     "requests>=2.32.5",
 ]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [dependency-groups]
 dev = [
