@@ -2,14 +2,8 @@
 
 A simple Python library for interfacing with Proresult.
 
-## Setup
-To set up for development, run:
-```
-uv sync
-```
-
 ## Installation
-To use in a project, add this in dependencies in pyproject.toml:
+To use in a project, add this to dependencies in pyproject.toml:
 
 ```
 "pyproresult @ git+ssh://git@github.com/asterisk-digital/pyproresult.git@main"
@@ -49,7 +43,7 @@ web_client = pyproresult.WebClient(
 
 To set up the python environment you need `uv`, then run:
 ```(bash)
-uv sync
+uv sync --group dev
 ```
 
 ### Run linter
