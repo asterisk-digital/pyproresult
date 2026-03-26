@@ -42,3 +42,30 @@ web_client = pyproresult.WebClient(
             password=envvars['PRORESULT_PASSWORD'],
             dbname=envvars['PRORESULT_DBNAME'])
 ```
+
+## Development
+
+### Setup
+
+To set up the python environment you need `uv`, then run:
+```(bash)
+uv sync
+```
+
+### Run linter
+
+```(bash)
+uv run ruff check .
+```
+
+### Run tests
+
+```(bash)
+uv run tox
+```
+
+### Run formatter
+
+```(bash)
+uv run ruff format .
+```
