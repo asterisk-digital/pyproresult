@@ -28,12 +28,16 @@ class WebClient:
         :return: The status code of the login request.
         """
 
-        payload = {"brnamn": self.username, "pass": self.password, "dbnamn": self.dbname}
+        payload = {
+            "brnamn": self.username,
+            "pass": self.password,
+            "dbnamn": self.dbname,
+        }
 
         response = self.session.post(f"{self.base_url}/userlogin.php", data=payload)
 
         if response.status_code == 200:
-            self.logger.debug(f"Proresult website login successful")
+            self.logger.debug("Proresult website login successful")
             self.logger.debug(response.text) if self.verbose else None
         else:
             self.logger.error(response.text)
@@ -49,7 +53,9 @@ class WebClient:
         """
         self.logger.debug("Running get_documents...")
 
-        login_website_request = self.session.get(f"{self.base_url}/Zdok_get.php?folderId={folder_id}&hideProjectdocs=1")
+        login_website_request = self.session.get(
+            f"{self.base_url}/Zdok_get.php?folderId={folder_id}&hideProjectdocs=1"
+        )
 
         login_website = BeautifulSoup(login_website_request.text, "html.parser")
 
@@ -62,7 +68,9 @@ class WebClient:
 
             # Extract filename
             filename_element = item.find("span", class_="document-name")
-            filename_content = filename_element.text.strip() if filename_element else None
+            filename_content = (
+                filename_element.text.strip() if filename_element else None
+            )
 
             if filename_content is None:
                 continue
@@ -71,7 +79,9 @@ class WebClient:
 
             # Extract document id
             document_id_element = item.find("div", attrs={"data-document-id": True})
-            document_id = document_id_element["data-document-id"] if document_id_element else None
+            document_id = (
+                document_id_element["data-document-id"] if document_id_element else None
+            )
 
             if document_id is None:
                 continue
@@ -80,7 +90,9 @@ class WebClient:
 
             # Extract uploaded date
             uploaded_date_element = item.find("span", class_="document-updated")
-            uploaded_date_content = uploaded_date_element.text.strip() if uploaded_date_element else None
+            uploaded_date_content = (
+                uploaded_date_element.text.strip() if uploaded_date_element else None
+            )
             file_metadata["UploadedDate"] = uploaded_date_content
 
             # add to list
@@ -102,10 +114,14 @@ class WebClient:
         self.logger.debug(f"Uploading {file_name} to proresult...")
         file = {"document": (file_name, file_content.read())}
 
-        response = self.session.post(f"{self.base_url}/Zdok_upload.php?folder={folder_id}", files=file)
+        response = self.session.post(
+            f"{self.base_url}/Zdok_upload.php?folder={folder_id}", files=file
+        )
 
         if response.status_code != 200:
-            raise ProresultException(f"Failed to upload {file_name} to proresult: {response.text}")
+            raise ProresultException(
+                f"Failed to upload {file_name} to proresult: {response.text}"
+            )
 
     def delete_document(self, document_id: int):
         """
@@ -115,7 +131,11 @@ class WebClient:
         """
         self.logger.debug(f"Deleting document with id {document_id}...")
 
-        response = self.session.get(f"{self.base_url}/Zdok.php?action=deleteDocument&dokid={document_id}")
+        response = self.session.get(
+            f"{self.base_url}/Zdok.php?action=deleteDocument&dokid={document_id}"
+        )
 
         if response.status_code != 200:
-            raise ProresultException(f"Error deleting document with id {document_id} from proresult: {response.text}")
+            raise ProresultException(
+                f"Error deleting document with id {document_id} from proresult: {response.text}"
+            )

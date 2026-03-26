@@ -11,7 +11,7 @@ class CsvDataError(Exception):
 
 class ApiClient:
     def __init__(self, account_id: str, api_secret: str):
-        self.api_url = f"https://proresult.app/soap/tmcapi.php"
+        self.api_url = "https://proresult.app/soap/tmcapi.php"
         self.account_id = account_id
         self.api_secret = api_secret
         self.headers = {
@@ -19,7 +19,9 @@ class ApiClient:
             "X-API-Secret": self.api_secret,
         }
 
-    def get_csv_data(self, function: str, query_params: dict | None = None) -> list[dict]:
+    def get_csv_data(
+        self, function: str, query_params: dict | None = None
+    ) -> list[dict]:
         """
         Gets data from Proresult as CSV
         :param function: The function to call in tmcapi.php
@@ -29,13 +31,18 @@ class ApiClient:
         """
         url = self.api_url + "?fn=" + function
         if query_params:
-            parts = [f"{key}={value}" if value is not None else f"{key}" for key, value in query_params.items()]
+            parts = [
+                f"{key}={value}" if value is not None else f"{key}"
+                for key, value in query_params.items()
+            ]
             url += "&" + "&".join(parts)
 
         response = requests.get(url, headers=self.headers, timeout=60)
 
         if response.status_code >= 300:
-            raise CsvDataError(f"Error getting CSV data, bad status code: {response.status_code} {response.text}")
+            raise CsvDataError(
+                f"Error getting CSV data, bad status code: {response.status_code} {response.text}"
+            )
 
         # The response from the API doesn't pass encoding header correctly, but we know it's utf-8
         csv_data_raw = response.content.decode("utf-8")
@@ -93,7 +100,9 @@ class ApiClient:
         response = requests.get(url, headers=self.headers, timeout=60)
 
         if response.status_code >= 300:
-            raise Exception(f"Error getting images, bad status code: {response.status_code} {response.text}")
+            raise Exception(
+                f"Error getting images, bad status code: {response.status_code} {response.text}"
+            )
 
         # Doesn't pass encoding header correctly, but it's utf-8
         xml_data_raw = response.content.decode("utf-8")
@@ -113,7 +122,9 @@ class ApiClient:
             filename = image.find("Filnavn").text
 
             if filename in images:
-                logging.warning(f"In PR deviation {deviation_id} image {filename} is duplicate, skipping")
+                logging.warning(
+                    f"In PR deviation {deviation_id} image {filename} is duplicate, skipping"
+                )
                 continue
 
             images[filename] = url
