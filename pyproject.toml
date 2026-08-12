@@ -1,16 +1,36 @@
 [project]
 name = "pyproresult"
-version = "1.0.0"
+dynamic = ["version"]
 description = "Library for interfacing with Proresult"
-authors = [{ name = "Asterisk Digital" }]
+authors = [{ name = "David Skoland", email = "david.skoland@asterisk.digital" }]
 readme = "README.md"
-license = { text = "MIT" }
+license = { file = "LICENSE.txt" }
 requires-python = ">=3.11"
+
+keywords = ["proresult", "api", "client", "hms", "hse"]
+
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
 dependencies = [
     "beautifulsoup4==4.14.3",
     "lxml==6.0.2",
     "requests==2.33.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/asterisk-digital/pyproresult"
+Repository = "https://github.com/asterisk-digital/pyproresult"
+Issues = "https://github.com/asterisk-digital/pyproresult/issues"
 
 [dependency-groups]
 dev = [
@@ -22,8 +42,14 @@ dev = [
 ]
 
 [build-system]
-requires = ["setuptools==82.0.1", "wheel==0.46.3"]
+requires = ["setuptools==82.0.1", "wheel==0.46.3", "setuptools-scm==8.3.1"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+# Version comes from git tags. The `-test` suffix on tags routes the
+# release workflow to TestPyPI but is stripped from the published version,
+# so e.g. tag v1.0.0-test -> published version 1.0.0.
+tag_regex = "^v(?P<version>[^-]+)(?:-test)?$"
 
 [tool.setuptools]
 package-dir = { "" = "src" }

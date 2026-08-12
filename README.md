@@ -3,10 +3,15 @@
 A simple Python library for interfacing with Proresult.
 
 ## Installation
-To use in a project, add this to dependencies in pyproject.toml:
 
+```bash
+uv add pyproresult
 ```
-"pyproresult @ git+https://github.com/asterisk-digital/pyproresult.git@main"
+
+or, with pip:
+
+```bash
+pip install pyproresult
 ```
 
 ## ApiClient
