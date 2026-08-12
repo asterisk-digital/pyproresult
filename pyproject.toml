@@ -2,7 +2,9 @@
 name = "pyproresult"
 version = "1.0.0"
 description = "Library for interfacing with Proresult"
+authors = [{ name = "Asterisk Digital" }]
 readme = "README.md"
+license = { text = "MIT" }
 requires-python = ">=3.11"
 dependencies = [
     "beautifulsoup4==4.14.3",
@@ -22,6 +24,13 @@ dev = [
 [build-system]
 requires = ["setuptools==82.0.1", "wheel==0.46.3"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["pyproresult*"]
 
 [tool.pytest.ini_options]
 addopts = "-ra"

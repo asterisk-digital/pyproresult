@@ -6,10 +6,10 @@ A simple Python library for interfacing with Proresult.
 To use in a project, add this to dependencies in pyproject.toml:
 
 ```
-"pyproresult @ git+ssh://git@github.com/asterisk-digital/pyproresult.git@main"
+"pyproresult @ git+https://github.com/asterisk-digital/pyproresult.git@main"
 ```
 
-## APIClient
+## ApiClient
 
 This class is used to interface with Proresult's API properly.
 
@@ -18,7 +18,7 @@ This class is used to interface with Proresult's API properly.
 ```(python)
 import pyproresult
 
-api_client = pyproresult.APIClient(account_id="YOUR_ACCOUNT_ID", api_key="YOUR_API_KEY")
+api_client = pyproresult.ApiClient(account_id="YOUR_ACCOUNT_ID", api_secret="YOUR_API_SECRET")
 ```
 
 ## WebClient
