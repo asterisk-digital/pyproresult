@@ -48,7 +48,7 @@ web_client = pyproresult.WebClient(
 
 To set up the python environment you need `uv`, then run:
 ```(bash)
-uv sync --group dev
+uv sync
 ```
 
 ### Run linter
