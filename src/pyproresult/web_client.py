@@ -4,9 +4,7 @@ from typing import BinaryIO
 import requests
 from bs4 import BeautifulSoup
 
-
-class ProresultException(Exception):
-    pass
+from .exceptions import ProresultException
 
 
 class WebClient:
