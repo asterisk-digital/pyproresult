@@ -59,3 +59,12 @@ include = ["pyproresult*"]
 [tool.pytest.ini_options]
 addopts = "-ra"
 testpaths = ["tests"]
+
+[tool.tox]
+env_list = ["py311", "py312", "py313"]
+
+[tool.tox.env_run_base]
+description = "Run tests with pytest"
+runner = "uv-venv-lock-runner"
+dependency_groups = ["dev"]
+commands = [["pytest"]]
