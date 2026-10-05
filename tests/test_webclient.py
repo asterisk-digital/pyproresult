@@ -20,7 +20,7 @@ DOCUMENTS_HTML = """
 
 def make_client(session: Mock) -> WebClient:
     with patch("pyproresult.web_client.requests.Session", return_value=session):
-        return WebClient("https://pr.example", "user", "pass", "db")
+        return WebClient("user", "pass", "db")
 
 
 def test_login_posts_credentials():
@@ -30,7 +30,7 @@ def test_login_posts_credentials():
     make_client(session)
 
     session.post.assert_called_once_with(
-        "https://pr.example/userlogin.php",
+        "https://proresult.app/adm/userlogin.php",
         data={"brnamn": "user", "pass": "pass", "dbnamn": "db"},
     )
 

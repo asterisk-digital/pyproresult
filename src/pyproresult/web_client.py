@@ -8,8 +8,8 @@ from .exceptions import ProresultException
 
 
 class WebClient:
-    def __init__(self, base_url, username, password, dbname):
-        self.base_url = base_url
+    def __init__(self, username, password, dbname):
+        self.base_url = "https://proresult.app/adm"
         self.username = username
         self.password = password
         self.dbname = dbname

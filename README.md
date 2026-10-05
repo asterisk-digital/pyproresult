@@ -31,7 +31,6 @@ import os
 import pyproresult
 
 web_client = pyproresult.WebClient(
-    base_url=os.environ["PRORESULT_URL"],
     username=os.environ["PRORESULT_USERNAME"],
     password=os.environ["PRORESULT_PASSWORD"],
     dbname=os.environ["PRORESULT_DBNAME"],
