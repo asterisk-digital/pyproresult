@@ -4,9 +4,7 @@ import logging
 import requests
 import lxml.etree as et
 
-
-class CsvDataError(Exception):
-    pass
+from .exceptions import CsvDataError, ProresultException
 
 
 class ApiClient:
@@ -100,7 +98,7 @@ class ApiClient:
         response = requests.get(url, headers=self.headers, timeout=60)
 
         if response.status_code >= 300:
-            raise Exception(
+            raise ProresultException(
                 f"Error getting images, bad status code: {response.status_code} {response.text}"
             )
 
@@ -109,11 +107,13 @@ class ApiClient:
 
         # Alternate error condition, they still send us 200 OK so we need to check the body
         if "TMCAPI - ingen tilgang" in xml_data_raw:
-            raise Exception(f"Error getting image XML data, no access: {response.text}")
+            raise ProresultException(
+                f"Error getting image XML data, no access: {response.text}"
+            )
 
         images = {}
 
-        # Parse xml data (fromstring takes a, uh, bytes-like object and not a string)
+        # fromstring needs bytes, not str
         root = et.fromstring(response.content)
         xml_images = root.xpath("/Bilder/Bilde")
 

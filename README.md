@@ -1,14 +1,10 @@
 # pyproresult
 
-A simple Python library for interfacing with Proresult.
+A simple Python library for interfacing with [Proresult](https://proresult.app).
+
+Unofficial: this project is not affiliated with or endorsed by Proresult.
 
 ## Installation
-
-```bash
-uv add pyproresult
-```
-
-or, with pip:
 
 ```bash
 pip install pyproresult
@@ -16,55 +12,39 @@ pip install pyproresult
 
 ## ApiClient
 
-This class is used to interface with Proresult's API properly.
+Reads data from Proresult's API.
 
-### Usage
-
-```(python)
+```python
 import pyproresult
 
 api_client = pyproresult.ApiClient(account_id="YOUR_ACCOUNT_ID", api_secret="YOUR_API_SECRET")
+projects = api_client.get_projects()
 ```
 
 ## WebClient
 
-This class is used to interface with Proresult's web interface, to enable things like document upload.
+Uses Proresult's web interface for things the API doesn't cover, like document upload.
 
-### Usage
+```python
+import os
 
-```(python)
 import pyproresult
 
 web_client = pyproresult.WebClient(
-            base_url=envvars['PRORESULT_URL'],
-            username=envvars['PRORESULT_USERNAME'],
-            password=envvars['PRORESULT_PASSWORD'],
-            dbname=envvars['PRORESULT_DBNAME'])
+    username=os.environ["PRORESULT_USERNAME"],
+    password=os.environ["PRORESULT_PASSWORD"],
+    dbname=os.environ["PRORESULT_DBNAME"],
+)
 ```
 
-## Development
+Both clients raise `pyproresult.ProresultException` on failure.
 
-### Setup
+## Contributing
 
-To set up the python environment you need `uv`, then run:
-```(bash)
+```bash
 uv sync
+uv run ruff check . && uv run ruff format --check . && uv run tox
 ```
 
-### Run linter
-
-```(bash)
-uv run ruff check .
-```
-
-### Run tests
-
-```(bash)
-uv run tox
-```
-
-### Run formatter
-
-```(bash)
-uv run ruff format .
-```
+- Runtime dependencies use lower bounds (`>=`); dev dependencies are exact-pinned.
+- Read required env vars with `os.environ[]`, not `os.getenv()`, so missing values fail loudly.

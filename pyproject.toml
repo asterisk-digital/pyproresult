@@ -10,7 +10,7 @@ requires-python = ">=3.11"
 keywords = ["proresult", "api", "client", "hms", "hse"]
 
 classifiers = [
-    "Development Status :: 5 - Production/Stable",
+    "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -22,9 +22,9 @@ classifiers = [
 ]
 
 dependencies = [
-    "beautifulsoup4==4.14.3",
-    "lxml==6.0.2",
-    "requests==2.33.0",
+    "beautifulsoup4>=4.12",
+    "lxml>=5.3",
+    "requests>=2.31",
 ]
 
 [project.urls]
@@ -46,9 +46,7 @@ requires = ["setuptools==82.0.1", "wheel==0.46.3", "setuptools-scm==8.3.1"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
-# Version comes from git tags. The `-test` suffix on tags routes the
-# release workflow to TestPyPI but is stripped from the published version,
-# so e.g. tag v1.0.0-test -> published version 1.0.0.
+# The `-test` tag suffix routes releases to TestPyPI and is stripped from the version.
 tag_regex = "^v(?P<version>[^-]+)(?:-test)?$"
 
 [tool.setuptools]
@@ -61,3 +59,12 @@ include = ["pyproresult*"]
 [tool.pytest.ini_options]
 addopts = "-ra"
 testpaths = ["tests"]
+
+[tool.tox]
+env_list = ["py311", "py312", "py313"]
+
+[tool.tox.env_run_base]
+description = "Run tests with pytest"
+runner = "uv-venv-lock-runner"
+dependency_groups = ["dev"]
+commands = [["pytest"]]
